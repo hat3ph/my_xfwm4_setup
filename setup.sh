@@ -53,7 +53,7 @@ install () {
     # configure sxhkd
 	if [[ $sxhkd_config == "yes" ]]; then
         mkdir -p $HOME/.config/sxhkd
-		cp .config/sxhkdrc $HOME/.config/sxhkd/sxhkdrc
+		cp ./config/sxhkdrc $HOME/.config/sxhkd/sxhkdrc
 	fi
 
     # install rofi-power-menu
