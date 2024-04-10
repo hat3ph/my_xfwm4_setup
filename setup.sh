@@ -43,6 +43,11 @@ install () {
 	git clone https://github.com/geany/geany-themes.git /tmp/geany-themes
 	cp -r /tmp/geany-themes/colorschemes/* $HOME/.config/geany/colorschemes/
 
+	# copy tint2rc settings
+	mkdir -p $HOME/.config/tint2
+	cp ./config/tint2rc $HOME/.config/tint2/tint2rc
+	sed -i 's/firefox/firefox-esr/g' $HOME/.config/tint2/tint2rc
+
 	# configure nano with line number
 	if [[ $nano_config == "yes" ]]; then
 		if [[ -f $HOME/.nanorc ]]; then mv $HOME/.nanorc $HOME/.nanorc_`date +%Y_%d_%m_%H_%M_%S`; fi
