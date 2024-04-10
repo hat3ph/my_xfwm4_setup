@@ -20,23 +20,23 @@ install () {
 			xdg-utils xdg-user-dirs policykit-1 libnotify-bin dunst nano less software-properties-gtk \
 			policykit-1-gnome dex gpicview geany gv flameshot feh xscreensaver unzip -y
 		#echo "xfwm4-session" > $HOME/.xinitrc
-        cp ./config/xsessionrc $HOME/.xsessionrc
+        	cp ./config/xsessionrc $HOME/.xsessionrc
 	fi
 
 	# install Nordic gtk theme https://github.com/EliverLara/Nordic
-    if [[ $nordic_theme == "yes" ]]; then
-        mkdir -p $HOME/.themes
-        wget -P /tmp https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic.tar.xz
-        tar -xvf /tmp/Nordic.tar.xz -C $HOME/.themes
-
-        mkdir -p $HOME/.config/gtk-3.0
-        cp ./config/gtk2 $HOME/.gtkrc-2.0
-        sed -i "s/administrator/"$USER"/g" $HOME/.gtkrc-2.0
-        cp ./config/gtk3 $HOME/.config/gtk-3.0/settings.ini
-
-        # setup xfwm4 to use Nordic theme
-        xfconf-query -c xfwm4 -p /general/theme -t "string" -s "Nordic"
-    fi
+ 	if [[ $nordic_theme == "yes" ]]; then
+	        mkdir -p $HOME/.themes
+	        wget -P /tmp https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic.tar.xz
+	        tar -xvf /tmp/Nordic.tar.xz -C $HOME/.themes
+	
+	        mkdir -p $HOME/.config/gtk-3.0
+	        cp ./config/gtk2 $HOME/.gtkrc-2.0
+	        sed -i "s/administrator/"$USER"/g" $HOME/.gtkrc-2.0
+	        cp ./config/gtk3 $HOME/.config/gtk-3.0/settings.ini
+	
+	        # setup xfwm4 to use Nordic theme
+	        #xfconf-query -c xfwm4 -p /general/theme -t "string" -s "Nordic"
+	 fi
 
 	# add additional geany colorscheme
 	mkdir -p $HOME/.config/geany/colorschemes
@@ -50,25 +50,25 @@ install () {
 		sed -i 's/# set const/set const/g' $HOME/.nanorc
 	fi
 
-    # configure sxhkd
+    	# configure sxhkd
 	if [[ $sxhkd_config == "yes" ]]; then
-        mkdir -p $HOME/.config/sxhkd
-		cp ./config/sxhkdrc $HOME/.config/sxhkd/sxhkdrc
+ 		mkdir -p $HOME/.config/sxhkd
+   		cp ./config/sxhkdrc $HOME/.config/sxhkd/sxhkdrc
 	fi
 
-    # install rofi-power-menu
-    if [[ $rofi_power_menu_config == "yes" ]]; then
-        mkdir -p $HOME/.local/bin
-        git clone https://github.com/jluttine/rofi-power-menu /tmp/rofi-power-menu
-        cp /tmp/rofi-power-menu/rofi-power-menu $HOME/.local/bin
-        chmod +x $HOME/.local/bin/rofi-power-menu
+	# install rofi-power-menu
+ 	if [[ $rofi_power_menu_config == "yes" ]]; then
+  		mkdir -p $HOME/.local/bin
+        	git clone https://github.com/jluttine/rofi-power-menu /tmp/rofi-power-menu
+        	cp /tmp/rofi-power-menu/rofi-power-menu $HOME/.local/bin
+        	chmod +x $HOME/.local/bin/rofi-power-menu
 
-        # install Nerd fonts for rofi-power-menu
-        mkdir -p $HOME/.fonts
-        wget -P /tmp https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.0/JetBrainsMono.zip
-        unzip /tmp/JetBrainsMono.zip -d $HOME/.fonts/
-        fc-cache -fv
-    fi
+        	# install Nerd fonts for rofi-power-menu
+        	mkdir -p $HOME/.fonts
+        	wget -P /tmp https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.0/JetBrainsMono.zip
+        	unzip /tmp/JetBrainsMono.zip -d $HOME/.fonts/
+        	fc-cache -fv
+	 fi
 
 	# use pipewire with wireplumber or pulseaudio-utils
 	if [[ $audio == "yes" ]]; then
@@ -92,10 +92,9 @@ install () {
 	# optional to install SDDM or LightDM login manager
 	if [[ $login_mgr == "yes" ]]; then
 		if [[ -n "$(uname -a | grep Ubuntu)" ]]; then
-			sudo apt-get install sddm -y
-            mkdir -p /usr/share/xsessions
-            sudo mkdir /usr/share/xsessions
-            sudo cp .config/xfwm4.desktop /usr/share/xsessions
+  			sudo apt-get install sddm -y
+   			sudo mkdir -p /usr/share/xsessions
+	 		sudo cp ./config/xfwm4.desktop /usr/share/xsessions
 		else
 			sudo apt-get install lightdm lightdm-gtk-greeter-settings -y
 		fi
