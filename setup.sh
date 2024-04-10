@@ -53,7 +53,7 @@ install () {
     # configure sxhkd
 	if [[ $sxhkd_config == "yes" ]]; then
         mkdir -p $HOME/.config/sxhkd
-		cp .config/sxhkdrc $HOME/.config/sxhkdrc
+		cp .config/sxhkdrc $HOME/.config/sxhkd/sxhkdrc
 	fi
 
     # install rofi-power-menu
@@ -94,7 +94,8 @@ install () {
 		if [[ -n "$(uname -a | grep Ubuntu)" ]]; then
 			sudo apt-get install sddm -y
             mkdir -p /usr/share/xsessions
-            cp .config/xfwm4.desktop /usr/share/xsessions
+            sudo mkdir /usr/share/xsessions
+            sudo cp .config/xfwm4.desktop /usr/share/xsessions
 		else
 			sudo apt-get install lightdm lightdm-gtk-greeter-settings -y
 		fi

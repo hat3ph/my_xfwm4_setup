@@ -18,7 +18,5 @@ nm-applet &
 xscreensaver --nosplash &
 # setup wallpaper using feh
 feh --bg-fill --randomize /usr/share/backgrounds/gnome/* &
-# slow gtk apps startup
-dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY &
 # start xfwm4 session
 xfwm4
