@@ -1,0 +1,6 @@
+super + t # open terminal
+	xfce4-terminal
+super + r # open rofi drun mode
+	rofi -show drun
+super + p # open rofi power menu mode
+	rofi -show power-menu -modi "power-menu:rofi-power-menu --choices=lockscreen/logout/reboot/shutdown --confirm=''"

@@ -1,0 +1,22 @@
+# change monitor resolution
+#xrandr --output Virtual-1 --mode 1440x900 &
+# run xdg autostart
+dex -a &
+# setup wallpaper using feh
+feh --bg-fill --randomize /usr/share/backgrounds/gnome/* &
+# start thunar file manager in daemon mode
+thunar --daemon &
+# start tint2 panel
+tint2 &
+# start sxhkd
+sxhkd &
+# start pnmixer audio systray applet
+pnmixer &
+# start NetworkManager applet
+nm-applet &
+# run xscreensaver
+xscreensaver --nosplash &
+# slow gtk apps startup
+dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY &
+# start xfwm4 session
+xfwm4
