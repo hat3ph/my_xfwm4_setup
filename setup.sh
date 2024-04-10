@@ -4,6 +4,7 @@
 my_xfwm4_install=yes # set no if just want to install xfwm4
 firefox_deb=yes # install firefox using the deb package
 sxhkd_config=yes # set no if do not want to configure sxhkd
+rofi_power_menu_confi=yes # set no if do not want to install rofi-power-menu
 audio=yes # set no if do not want to use pipewire audio server
 thunar=yes # set no if do not want to install thunar file manager
 login_mgr=yes # set no if do not want to install SDDM login manager
@@ -16,7 +17,7 @@ install () {
 		sudo apt-get update && sudo apt-get upgrade -y
 		sudo apt-get install xorg xinit xfce4-terminal xfwm4 tint2 rofi sxhkd feh gnome-backgrounds lxappearance papirus-icon-theme \
 			xdg-utils xdg-user-dirs policykit-1 libnotify-bin dunst nano less software-properties-gtk \
-			policykit-1-gnome dex gpicview geany gv flameshot feh xscreensaver -y
+			policykit-1-gnome dex gpicview geany gv flameshot feh xscreensaver unzip -y
 		#echo "xfwm4-session" > $HOME/.xinitrc
         cp ./config/xinitrc $HOME/.xinitrc
 	fi
@@ -48,6 +49,20 @@ install () {
         mkdir -p $HOME/.config/sxhkd
 		cp .config/sxhkdrc $HOME/.config/sxhkd
 	fi
+
+    # install rofi-power-menu
+    if [[ $rofi_power_menu_config == "yes" ]]; then
+        mkdir -p $HOME/.local/bin
+        git clone https://github.com/jluttine/rofi-power-menu /tmp/rofi-power-menu
+        cp /tmp/rofi-power-menu/rofi-power-menu $HOME/.local/bin
+        chmod +x $HOME/.local/bin/rofi-power-menu
+
+        # install Nerd fonts for rofi-power-menu
+        mkdir -p $HOME/.fonts
+        wget -P /tmp https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.0/JetBrainsMono.zip
+        unzip /tmp/JetBrainsMono.zip -d $HOME/.fonts/
+        fc-cache -fv
+    fi
 
 	# use pipewire with wireplumber or pulseaudio-utils
 	if [[ $audio == "yes" ]]; then
@@ -125,6 +140,7 @@ printf "88888888888888888888888888888\n"
 printf "My xfwm4 Install        : $my_xfwm4_install\n"
 printf "Firefox as DEB packages : $firefox_deb\n"
 printf "sxhkd Config            : $sxhkd_config\n"
+printf "Rofi power menu         : $rofi_power_menu_config\n"
 printf "Pipewire Audio          : $audio\n"
 printf "Thunar File Manager     : $thunar\n"
 printf "Login Manager           : $login_mgr\n"
