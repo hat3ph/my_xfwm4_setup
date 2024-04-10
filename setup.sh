@@ -4,7 +4,8 @@
 my_xfwm4_install=yes # set no if just want to install xfwm4
 firefox_deb=yes # install firefox using the deb package
 sxhkd_config=yes # set no if do not want to configure sxhkd
-rofi_power_menu_confi=yes # set no if do not want to install rofi-power-menu
+rofi_power_menu_config=yes # set no if do not want to install rofi-power-menu
+nordic_theme=yes # set no if do not want to install nordic theme
 audio=yes # set no if do not want to use pipewire audio server
 thunar=yes # set no if do not want to install thunar file manager
 login_mgr=yes # set no if do not want to install SDDM login manager
@@ -19,18 +20,23 @@ install () {
 			xdg-utils xdg-user-dirs policykit-1 libnotify-bin dunst nano less software-properties-gtk \
 			policykit-1-gnome dex gpicview geany gv flameshot feh xscreensaver unzip -y
 		#echo "xfwm4-session" > $HOME/.xinitrc
-        cp ./config/xinitrc $HOME/.xinitrc
+        cp ./config/xsessionrc $HOME/.xsessionrc
 	fi
 
 	# install Nordic gtk theme https://github.com/EliverLara/Nordic
-	mkdir -p $HOME/.themes
-	wget -P /tmp https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic.tar.xz
-	tar -xvf /tmp/Nordic.tar.xz -C $HOME/.themes
+    if [[ $nordic_theme == "yes" ]]; then
+        mkdir -p $HOME/.themes
+        wget -P /tmp https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic.tar.xz
+        tar -xvf /tmp/Nordic.tar.xz -C $HOME/.themes
 
-	mkdir -p $HOME/.config/gtk-3.0
-	cp ./config/gtk2 $HOME/.gtkrc-2.0
-	sed -i "s/administrator/"$USER"/g" $HOME/.gtkrc-2.0
-	cp ./config/gtk3 $HOME/.config/gtk-3.0/settings.ini
+        mkdir -p $HOME/.config/gtk-3.0
+        cp ./config/gtk2 $HOME/.gtkrc-2.0
+        sed -i "s/administrator/"$USER"/g" $HOME/.gtkrc-2.0
+        cp ./config/gtk3 $HOME/.config/gtk-3.0/settings.ini
+
+        # setup xfwm4 to use Nordic theme
+        xfconf-query -c xfwm4 -p /general/theme -t "string" -s "Nordic"
+    fi
 
 	# add additional geany colorscheme
 	mkdir -p $HOME/.config/geany/colorschemes
@@ -47,7 +53,7 @@ install () {
     # configure sxhkd
 	if [[ $sxhkd_config == "yes" ]]; then
         mkdir -p $HOME/.config/sxhkd
-		cp .config/sxhkdrc $HOME/.config/sxhkd
+		cp .config/sxhkdrc $HOME/.config/sxhkdrc
 	fi
 
     # install rofi-power-menu
@@ -87,6 +93,8 @@ install () {
 	if [[ $login_mgr == "yes" ]]; then
 		if [[ -n "$(uname -a | grep Ubuntu)" ]]; then
 			sudo apt-get install sddm -y
+            mkdir -p /usr/share/xsessions
+            cp .config/xfwm4.desktop /usr/share/xsessions
 		else
 			sudo apt-get install lightdm lightdm-gtk-greeter-settings -y
 		fi
@@ -141,6 +149,7 @@ printf "My xfwm4 Install        : $my_xfwm4_install\n"
 printf "Firefox as DEB packages : $firefox_deb\n"
 printf "sxhkd Config            : $sxhkd_config\n"
 printf "Rofi power menu         : $rofi_power_menu_config\n"
+printf "Nordic Theme install    : $nordic_theme\n"
 printf "Pipewire Audio          : $audio\n"
 printf "Thunar File Manager     : $thunar\n"
 printf "Login Manager           : $login_mgr\n"
