@@ -20,22 +20,22 @@ install () {
 			xdg-utils xdg-user-dirs policykit-1 libnotify-bin dunst nano less software-properties-gtk \
 			policykit-1-gnome dex gpicview geany gv flameshot feh xscreensaver unzip -y
 		#echo "xfwm4-session" > $HOME/.xinitrc
-        	cp ./config/xsessionrc $HOME/.xsessionrc
+        cp ./config/xsessionrc $HOME/.xsessionrc
 	fi
 
 	# install Nordic gtk theme https://github.com/EliverLara/Nordic
  	if [[ $nordic_theme == "yes" ]]; then
-	        mkdir -p $HOME/.themes
-	        wget -P /tmp https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic.tar.xz
-	        tar -xvf /tmp/Nordic.tar.xz -C $HOME/.themes
+	    mkdir -p $HOME/.themes
+	    wget -P /tmp https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic.tar.xz
+	    tar -xvf /tmp/Nordic.tar.xz -C $HOME/.themes
 	
-	        mkdir -p $HOME/.config/gtk-3.0
-	        cp ./config/gtk2 $HOME/.gtkrc-2.0
-	        sed -i "s/administrator/"$USER"/g" $HOME/.gtkrc-2.0
-	        cp ./config/gtk3 $HOME/.config/gtk-3.0/settings.ini
+	    mkdir -p $HOME/.config/gtk-3.0
+	    cp ./config/gtk2 $HOME/.gtkrc-2.0
+	    sed -i "s/administrator/"$USER"/g" $HOME/.gtkrc-2.0
+	    cp ./config/gtk3 $HOME/.config/gtk-3.0/settings.ini
 	
-	        # setup xfwm4 to use Nordic theme
-	        #xfconf-query -c xfwm4 -p /general/theme -t "string" -s "Nordic"
+		# setup xfwm4 to use Nordic theme
+	    #xfconf-query -c xfwm4 -p /general/theme -t "string" -s "Nordic"
 	 fi
 
 	# add additional geany colorscheme
@@ -46,7 +46,6 @@ install () {
 	# copy tint2rc settings
 	mkdir -p $HOME/.config/tint2
 	cp ./config/tint2rc $HOME/.config/tint2/tint2rc
-	sed -i 's/firefox/firefox-esr/g' $HOME/.config/tint2/tint2rc
 
 	# configure nano with line number
 	if [[ $nano_config == "yes" ]]; then
@@ -64,25 +63,25 @@ install () {
 	# install rofi-power-menu
  	if [[ $rofi_power_menu_config == "yes" ]]; then
   		mkdir -p $HOME/.local/bin
-        	git clone https://github.com/jluttine/rofi-power-menu /tmp/rofi-power-menu
-        	cp /tmp/rofi-power-menu/rofi-power-menu $HOME/.local/bin
-        	chmod +x $HOME/.local/bin/rofi-power-menu
+    	git clone https://github.com/jluttine/rofi-power-menu /tmp/rofi-power-menu
+        cp /tmp/rofi-power-menu/rofi-power-menu $HOME/.local/bin
+        chmod +x $HOME/.local/bin/rofi-power-menu
 
-        	# install Nerd fonts for rofi-power-menu
-        	mkdir -p $HOME/.fonts
-        	wget -P /tmp https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.0/JetBrainsMono.zip
-        	unzip /tmp/JetBrainsMono.zip -d /tmp/JetBrainsMono
-	 	cp /tmp/JetBrainsMono/*.ttf $HOME/.fonts/
-        	fc-cache -fv
+        # install Nerd fonts for rofi-power-menu
+        mkdir -p $HOME/.fonts
+        wget -P /tmp https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.0/JetBrainsMono.zip
+        unzip /tmp/JetBrainsMono.zip -d /tmp/JetBrainsMono
+		cp /tmp/JetBrainsMono/*.ttf $HOME/.fonts/
+        fc-cache -fv
 	 fi
 
 	# use pipewire with wireplumber or pulseaudio-utils
 	if [[ $audio == "yes" ]]; then
 		# install pulseaudio-utils to audio management for Ubuntu 22.04 due to out-dated wireplumber packages
 		if [[ ! $(cat /etc/os-release | awk 'NR==3' | cut -c12- | sed s/\"//g) == "22.04" ]]; then
-			sudo apt-get install pipewire pipewire-pulse wireplumber pavucontrol pnmixer -y
+			sudo apt-get install pipewire pipewire-pulse wireplumber pnmixer -y
 		else
-			sudo apt-get install pipewire pipewire-media-session pulseaudio pulseaudio-utils pavucontrol pnmixer -y
+			sudo apt-get install pipewire pipewire-media-session pulseaudio pulseaudio-utils pnmixer -y
 		fi
 		mkdir -p $HOME/.config/pnmixer
 		cp ./config/pnmixer $HOME/.config/pnmixer/config
@@ -120,6 +119,7 @@ install () {
 			sudo apt-get update && sudo apt-get install firefox -y
 		else
 			sudo apt-get install firefox-esr -y
+			sed -i 's/firefox/firefox-esr/g' $HOME/.config/tint2/tint2rc
 		fi
   	fi
 
