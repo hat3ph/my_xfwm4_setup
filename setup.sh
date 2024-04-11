@@ -71,7 +71,8 @@ install () {
         	# install Nerd fonts for rofi-power-menu
         	mkdir -p $HOME/.fonts
         	wget -P /tmp https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.0/JetBrainsMono.zip
-        	unzip /tmp/JetBrainsMono.zip -d $HOME/.fonts/
+        	unzip /tmp/JetBrainsMono.zip -d /tmp/JetBrainsMono
+	 	cp /tmp/JetBrainsMono/*.ttf $HOME/.fonts/
         	fc-cache -fv
 	 fi
 
