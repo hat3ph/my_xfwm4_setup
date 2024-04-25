@@ -6,8 +6,8 @@ thunar --daemon &
 dex -a &
 # slow gtk apps startup
 dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY &
-# start tint2 panel
-tint2 &
+# start xfce4-panel
+xfce4-panel &
 # start sxhkd
 sxhkd &
 # start pnmixer audio systray applet

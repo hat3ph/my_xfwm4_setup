@@ -16,9 +16,9 @@ install () {
 	# install xfwm4 and other packages
 	if [[ $my_xfwm4_install == "yes" ]]; then
 		sudo apt-get update && sudo apt-get upgrade -y
-		sudo apt-get install xorg xinit xfce4-terminal xfwm4 tint2 rofi sxhkd feh gnome-backgrounds lxappearance papirus-icon-theme \
-			xdg-utils xdg-user-dirs policykit-1 libnotify-bin dunst nano less software-properties-gtk \
-			policykit-1-gnome dex gpicview geany gv flameshot feh xscreensaver unzip -y
+		sudo apt-get install xorg xinit xfce4-terminal xfwm4 xfce4-panel rofi sxhkd feh gnome-backgrounds \
+			lxappearance papirus-icon-theme xdg-utils xdg-user-dirs policykit-1 libnotify-bin dunst nano \
+			less software-properties-gtk policykit-1-gnome dex gpicview geany gv flameshot feh xscreensaver unzip -y
 		#echo "xfwm4-session" > $HOME/.xinitrc
         cp ./config/xsessionrc $HOME/.xsessionrc
 	fi
@@ -35,7 +35,7 @@ install () {
 	    cp ./config/gtk3 $HOME/.config/gtk-3.0/settings.ini
 	
 		# setup xfwm4 to use Nordic theme
-	    #xfconf-query -c xfwm4 -p /general/theme -t "string" -s "Nordic"
+		#xfconf-query -c xfwm4 -p /general/theme -t "string" -s "Nordic"
 	 fi
 
 	# add additional geany colorscheme
@@ -44,8 +44,17 @@ install () {
 	cp -r /tmp/geany-themes/colorschemes/* $HOME/.config/geany/colorschemes/
 
 	# copy tint2rc settings
-	mkdir -p $HOME/.config/tint2
-	cp ./config/tint2rc $HOME/.config/tint2/tint2rc
+	#mkdir -p $HOME/.config/tint2
+	#cp ./config/tint2rc $HOME/.config/tint2/tint2rc
+
+	# copy xfce4-panel settings
+	mkdir -p $HOME/.config/xfce4/panel/launcher-{8,10,14,15}
+	mkdir -p $HOME/.config/xfce4/xfconf/xfce-perchannel-xml
+	cp ./config/xfce4-panel $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/
+	cp ./config/17140153922.desktop $HOME/.config/xfce4/panel/launcher-8/
+	cp ./config/17140154333.desktop $HOME/.config/xfce4/panel/launcher-10/
+	cp ./config/17140154514.desktop $HOME/.config/xfce4/panel/launcher-14/
+	cp ./config/17140154514.desktop $HOME/.config/xfce4/panel/launcher-15/
 
 	# configure nano with line number
 	if [[ $nano_config == "yes" ]]; then
@@ -119,7 +128,9 @@ install () {
 			sudo apt-get update && sudo apt-get install firefox -y
 		else
 			sudo apt-get install firefox-esr -y
-			sed -i 's/firefox/firefox-esr/g' $HOME/.config/tint2/tint2rc
+			# change from firefox to firefox-esr for application launcher
+			#sed -i 's/firefox/firefox-esr/g' $HOME/.config/tint2/tint2rc
+			sed -i 's/firefox/firefox-esr/g' $HOME/.config/xfce4/panel/launcher-10/17140154333.desktop
 		fi
   	fi
 
