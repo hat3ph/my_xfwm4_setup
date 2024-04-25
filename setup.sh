@@ -54,7 +54,7 @@ install () {
 	cp ./config/17140153922.desktop $HOME/.config/xfce4/panel/launcher-8/
 	cp ./config/17140154333.desktop $HOME/.config/xfce4/panel/launcher-10/
 	cp ./config/17140154514.desktop $HOME/.config/xfce4/panel/launcher-14/
-	cp ./config/17140154514.desktop $HOME/.config/xfce4/panel/launcher-15/
+	cp ./config/17140154635.desktop $HOME/.config/xfce4/panel/launcher-15/
 
 	# configure nano with line number
 	if [[ $nano_config == "yes" ]]; then
