@@ -18,6 +18,6 @@ nm-applet &
 xscreensaver -nosplash &
 xss-lock -- xscreensaver-command -lock &
 # setup wallpaper using feh
-feh --bg-fill --randomize /usr/share/backgrounds/gnome/* &
+feh --bg-fill --randomize $HOME/Pictures/wallpapers/* &
 # start xfwm4 session
 #xfwm4
