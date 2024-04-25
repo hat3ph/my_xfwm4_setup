@@ -17,7 +17,7 @@ install () {
 	if [[ $my_xfwm4_install == "yes" ]]; then
 		sudo apt-get update && sudo apt-get upgrade -y
 		sudo apt-get install xorg xinit xfce4-terminal xfwm4 xfce4-panel rofi sxhkd feh gnome-backgrounds \
-			lxappearance papirus-icon-theme xdg-utils xdg-user-dirs policykit-1 libnotify-bin dunst nano \
+			lxappearance papirus-icon-theme xdg-utils xdg-user-dirs policykit-1 libnotify-bin dunst nano xss-lock \
 			less software-properties-gtk policykit-1-gnome dex gpicview geany gv flameshot feh xscreensaver unzip -y
 		#echo "xfwm4-session" > $HOME/.xinitrc
         	cp ./config/xsessionrc $HOME/.xsessionrc
