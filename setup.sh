@@ -25,7 +25,7 @@ install () {
 
  	# copy wallpapers
   	mkdir -p $HOME/Pictures/wallpapers
-   	copy ./wallpapers/* $HOME/Pictures/wallpapers
+   	copy ./wallpapers/* $HOME/Pictures/wallpapers/
 
 	# install Nordic gtk theme https://github.com/EliverLara/Nordic
  	if [[ $nordic_theme == "yes" ]]; then
