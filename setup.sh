@@ -21,11 +21,6 @@ install () {
 			less software-properties-gtk policykit-1-gnome dex gpicview geany gv flameshot feh xscreensaver unzip -y
 		#echo "xfwm4-session" > $HOME/.xinitrc
         cp ./config/xsessionrc $HOME/.xsessionrc
-		if [[ -n "$(uname -a | grep Ubuntu)" ]]; then
-			sudo apt-get install xss-lock -y
-   			sed -i 's/#xscreensaver/xscreensaver/g' $HOME/.xsessionrc
-			sed -i 's/#xss-lock/xss-lock/g' $HOME/.xsessionrc
-   		fi
 	fi
 
 	# install Nordic gtk theme https://github.com/EliverLara/Nordic

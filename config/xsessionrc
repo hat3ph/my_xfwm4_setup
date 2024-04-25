@@ -15,8 +15,8 @@ pnmixer &
 # start NetworkManager applet
 nm-applet &
 # run xscreensaver and lock screen
-#xscreensaver -nosplash &
-#xss-lock -- xscreensaver-command -lock &
+xscreensaver -nosplash &
+xss-lock -- xscreensaver-command -lock &
 # setup wallpaper using feh
 feh --bg-fill --randomize /usr/share/backgrounds/gnome/* &
 # start xfwm4 session
