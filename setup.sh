@@ -20,23 +20,23 @@ install () {
 			lxappearance papirus-icon-theme xdg-utils xdg-user-dirs policykit-1 libnotify-bin dunst nano \
 			less software-properties-gtk policykit-1-gnome dex gpicview geany gv flameshot feh xscreensaver unzip -y
 		#echo "xfwm4-session" > $HOME/.xinitrc
-        cp ./config/xsessionrc $HOME/.xsessionrc
+        	cp ./config/xsessionrc $HOME/.xsessionrc
 	fi
 
 	# install Nordic gtk theme https://github.com/EliverLara/Nordic
  	if [[ $nordic_theme == "yes" ]]; then
-	    mkdir -p $HOME/.themes
-	    wget -P /tmp https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic.tar.xz
-	    tar -xvf /tmp/Nordic.tar.xz -C $HOME/.themes
-	
-	    mkdir -p $HOME/.config/gtk-3.0
-	    cp ./config/gtk2 $HOME/.gtkrc-2.0
-	    sed -i "s/administrator/"$USER"/g" $HOME/.gtkrc-2.0
-	    cp ./config/gtk3 $HOME/.config/gtk-3.0/settings.ini
+		mkdir -p $HOME/.themes
+		wget -P /tmp https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic.tar.xz
+		tar -xvf /tmp/Nordic.tar.xz -C $HOME/.themes
+		
+		mkdir -p $HOME/.config/gtk-3.0
+		cp ./config/gtk2 $HOME/.gtkrc-2.0
+		sed -i "s/administrator/"$USER"/g" $HOME/.gtkrc-2.0
+		cp ./config/gtk3 $HOME/.config/gtk-3.0/settings.ini
 	
 		# setup xfwm4 to use Nordic theme
 		#xfconf-query -c xfwm4 -p /general/theme -t "string" -s "Nordic"
-	 fi
+	fi
 
 	# add additional geany colorscheme
 	mkdir -p $HOME/.config/geany/colorschemes
@@ -50,7 +50,7 @@ install () {
 	# copy xfce4-panel settings
 	mkdir -p $HOME/.config/xfce4/panel/launcher-{8,10,14,15}
 	mkdir -p $HOME/.config/xfce4/xfconf/xfce-perchannel-xml
-	cp ./config/xfce4-panel $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/
+	cp ./config/xfce4-panel.xml $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/
 	cp ./config/17140153922.desktop $HOME/.config/xfce4/panel/launcher-8/
 	cp ./config/17140154333.desktop $HOME/.config/xfce4/panel/launcher-10/
 	cp ./config/17140154514.desktop $HOME/.config/xfce4/panel/launcher-14/
@@ -72,16 +72,16 @@ install () {
 	# install rofi-power-menu
  	if [[ $rofi_power_menu_config == "yes" ]]; then
   		mkdir -p $HOME/.local/bin
-    	git clone https://github.com/jluttine/rofi-power-menu /tmp/rofi-power-menu
-        cp /tmp/rofi-power-menu/rofi-power-menu $HOME/.local/bin
-        chmod +x $HOME/.local/bin/rofi-power-menu
+    		git clone https://github.com/jluttine/rofi-power-menu /tmp/rofi-power-menu
+        	cp /tmp/rofi-power-menu/rofi-power-menu $HOME/.local/bin
+        	chmod +x $HOME/.local/bin/rofi-power-menu
 
-        # install Nerd fonts for rofi-power-menu
-        mkdir -p $HOME/.fonts
-        wget -P /tmp https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.0/JetBrainsMono.zip
-        unzip /tmp/JetBrainsMono.zip -d /tmp/JetBrainsMono
+        	# install Nerd fonts for rofi-power-menu
+        	mkdir -p $HOME/.fonts
+        	wget -P /tmp https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.0/JetBrainsMono.zip
+        	unzip /tmp/JetBrainsMono.zip -d /tmp/JetBrainsMono
 		cp /tmp/JetBrainsMono/*.ttf $HOME/.fonts/
-        fc-cache -fv
+        	fc-cache -fv
 	 fi
 
 	# use pipewire with wireplumber or pulseaudio-utils
