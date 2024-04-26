@@ -79,6 +79,9 @@ install () {
     		git clone https://github.com/jluttine/rofi-power-menu /tmp/rofi-power-menu
         	cp /tmp/rofi-power-menu/rofi-power-menu $HOME/.local/bin
         	chmod +x $HOME/.local/bin/rofi-power-menu
+	 	# fix issue cannot logout issue with SDDM
+   		# https://github.com/jluttine/rofi-power-menu/issues/22
+	 	sed -i 's/loginctl terminate-session ${XDG_SESSION_ID-}/pkill -u $USER/g' $HOME/.local/bin/rofi-power-menu
 
         	# install Nerd fonts for rofi-power-menu
         	mkdir -p $HOME/.fonts
