@@ -6,7 +6,7 @@ super + r
 	rofi -show drun
 # open rofi power menu mode
 super + p
-	rofi -show power-menu -modi "power-menu:$HOME/.local/bin/rofi-power-menu --choices=lockscreen/logout/reboot/shutdown --confirm=''"
+	$HOME/.local/bin/power.sh
 # open flameshot screen capture
 Print
 	flameshot gui
