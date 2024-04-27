@@ -16,11 +16,11 @@ install () {
 	# install xfwm4 and other packages
 	if [[ $my_xfwm4_install == "yes" ]]; then
 		sudo apt-get update && sudo apt-get upgrade -y
-		sudo apt-get install xorg xinit xfce4-terminal xfwm4 xfce4-panel rofi sxhkd feh xscreensaver xss-lock \
+		sudo apt-get install xorg xinit xfce4-terminal xfwm4 xfce4-panel sxhkd feh xscreensaver \
 			lxappearance papirus-icon-theme xdg-utils xdg-user-dirs policykit-1 libnotify-bin dunst nano \
 			less software-properties-gtk policykit-1-gnome dex gpicview geany gv flameshot unzip -y
-		#echo "xfwm4-session" > $HOME/.xinitrc
-        	cp ./config/xsessionrc $HOME/.xsessionrc
+		echo "exec xfwm4" > $HOME/.xinitrc
+        cp ./config/xsessionrc $HOME/.xsessionrc
 	fi
 
  	# copy wallpapers
@@ -75,21 +75,11 @@ install () {
 
 	# install rofi-power-menu
  	if [[ $rofi_power_menu_config == "yes" ]]; then
-  		mkdir -p $HOME/.local/bin
-    		git clone https://github.com/jluttine/rofi-power-menu /tmp/rofi-power-menu
-        	cp /tmp/rofi-power-menu/rofi-power-menu $HOME/.local/bin
-        	chmod +x $HOME/.local/bin/rofi-power-menu
-	 	# fix issue cannot logout issue with SDDM
-   		# https://github.com/jluttine/rofi-power-menu/issues/22
-	 	sed -i 's/loginctl terminate-session ${XDG_SESSION_ID-}/pkill -u $USER/g' $HOME/.local/bin/rofi-power-menu
-
-        	# install Nerd fonts for rofi-power-menu
-        	mkdir -p $HOME/.fonts
-        	wget -P /tmp https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.0/JetBrainsMono.zip
-        	unzip /tmp/JetBrainsMono.zip -d /tmp/JetBrainsMono
-		cp /tmp/JetBrainsMono/*.ttf $HOME/.fonts/
-        	fc-cache -fv
-	 fi
+  		sudo apt-get install rofi -y
+		mkdir -p $HOME/.local/bin
+		cp ./config/power.sh $HOME/.local/bin
+		chmod +x $HOME/.local/bin/power.sh
+	fi
 
 	# use pipewire with wireplumber or pulseaudio-utils
 	if [[ $audio == "yes" ]]; then

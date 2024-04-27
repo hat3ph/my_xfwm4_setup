@@ -16,8 +16,5 @@ sleep 1 && pnmixer &
 sleep 1 && nm-applet &
 # run xscreensaver and lock screen
 sleep 1 && xscreensaver -nosplash &
-sleep 1 && xss-lock -- xscreensaver-command -lock &
 # setup wallpaper using feh
-feh --bg-fill --randomize $HOME/Pictures/wallpapers/* &
-# start xfwm4 session
-#xfwm4
+feh --bg-fill --randomize $HOME/Pictures/wallpapers/*
