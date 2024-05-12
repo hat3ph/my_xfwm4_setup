@@ -30,10 +30,12 @@ install () {
 		wget -P /tmp https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic.tar.xz
 		tar -xvf /tmp/Nordic.tar.xz -C $HOME/.themes
 		
+		# gtk2 and gtk3 settings
 		mkdir -p $HOME/.config/gtk-3.0
 		cp ./config/gtk2 $HOME/.gtkrc-2.0
 		sed -i "s/administrator/"$USER"/g" $HOME/.gtkrc-2.0
 		cp ./config/gtk3 $HOME/.config/gtk-3.0/settings.ini
+		cp ./config/gtk.css $HOME/.config/gtk-3.0/gtk.css
 	
 		# setup xfwm4 to use Nordic theme
 		#xfconf-query -c xfwm4 -p /general/theme -t "string" -s "Nordic"
