@@ -122,10 +122,10 @@ install () {
 
 	# optional to install SDDM or LightDM login manager
 	if [[ $login_mgr == "yes" ]]; then
+ 		sudo mkdir -p /usr/share/xsessions
+	 	sudo cp ./config/xfwm4.desktop /usr/share/xsessions
 		if [[ -n "$(uname -a | grep Ubuntu)" ]]; then
   			sudo apt-get install sddm -y
-   			sudo mkdir -p /usr/share/xsessions
-	 		sudo cp ./config/xfwm4.desktop /usr/share/xsessions
 		else
 			sudo apt-get install lightdm lightdm-gtk-greeter-settings -y
 		fi
