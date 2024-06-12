@@ -22,6 +22,9 @@ install () {
 			less software-properties-gtk policykit-1-gnome dex gpicview geany gv flameshot unzip -y
 		echo "exec xfwm4" > $HOME/.xinitrc
         	cp ./config/xsessionrc $HOME/.xsessionrc
+	 	# enable acpid
+   		sudo apt-get install acpid -y
+     		sudo systemctl enable acpid
 	fi
 
 	# install Nordic gtk theme https://github.com/EliverLara/Nordic
@@ -153,7 +156,7 @@ install () {
 
 	# optional install NetworkManager
 	if [[ $nm == yes ]]; then
-	sudo apt-get install network-manager network-manager-gnome -y
+		sudo apt-get install network-manager network-manager-gnome -y
 		if [[ -n "$(uname -a | grep Ubuntu)" ]]; then
 			for file in `find /etc/netplan/* -maxdepth 0 -type f -name *.yaml`; do
 				sudo mv $file $file.bak
