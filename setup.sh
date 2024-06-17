@@ -23,8 +23,8 @@ install () {
 		echo "exec xfwm4" > $HOME/.xinitrc
         	cp ./config/xsessionrc $HOME/.xsessionrc
 	 	# enable acpid
-   		sudo apt-get install acpid -y
-     		sudo systemctl enable acpid
+   		#sudo apt-get install acpid -y
+     		#sudo systemctl enable acpid
 	fi
 
 	# install Nordic gtk theme https://github.com/EliverLara/Nordic
