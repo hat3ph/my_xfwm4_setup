@@ -57,12 +57,11 @@ install () {
       		git clone https://github.com/dracula/xfce4-terminal.git /tmp/xfce4-terminal
 		cp /tmp/xfce4-terminal/Dracula.theme $HOME/.local/share/xfce4/terminal/colorschemes
 
-		# install dracula gtk theme
+		# install dracula themes
   		mkdir -p $HOME/.icons
     		wget -P /tmp https://github.com/dracula/gtk/releases/download/v4.0.0/Dracula-cursors.tar.xz
       		tar -xvf /tmp/Dracula-cursors.tar.xz -C $HOME/.icons
 
-  		# install dracula cursor theme
 		mkdir -p $HOME/.themes
 		wget -P /tmp https://github.com/dracula/gtk/releases/download/v4.0.0/Dracula.tar.xz
   		tar -xvf /tmp/Dracula.tar.xz -C $HOME/.themes
