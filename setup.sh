@@ -21,10 +21,10 @@ install () {
 			lxappearance papirus-icon-theme xdg-utils xdg-user-dirs policykit-1 libnotify-bin dunst nano \
 			less software-properties-gtk policykit-1-gnome dex gpicview geany gv flameshot unzip -y
 		echo "exec xfwm4" > $HOME/.xinitrc
-        	cp ./config/xsessionrc $HOME/.xsessionrc
+        cp ./config/xsessionrc $HOME/.xsessionrc
 	 	# enable acpid
    		#sudo apt-get install acpid -y
-     		#sudo systemctl enable acpid
+     	#sudo systemctl enable acpid
 	fi
 
 	# install Nordic gtk theme https://github.com/EliverLara/Nordic
@@ -36,7 +36,7 @@ install () {
 		# gtk2 and gtk3 settings
 		mkdir -p $HOME/.config/gtk-3.0
 		cp ./config/gtk2 $HOME/.gtkrc-2.0
-		sed -i "s/administrator/"$USER"/g" $HOME/.gtkrc-2.0
+		#sed -i "s/administrator/"$USER"/g" $HOME/.gtkrc-2.0
 		cp ./config/gtk3 $HOME/.config/gtk-3.0/settings.ini
 		cp ./config/gtk.css $HOME/.config/gtk-3.0/gtk.css
 	
@@ -53,14 +53,14 @@ install () {
 		cp -r /tmp/geany-themes/colorschemes/* $HOME/.config/geany/colorschemes/
 
   		# insall dracula xfce4-terminal theme
-    		mkdir -p $HOME/.local/share/xfce4/terminal/colorschemes
-      		git clone https://github.com/dracula/xfce4-terminal.git /tmp/xfce4-terminal
+    	mkdir -p $HOME/.local/share/xfce4/terminal/colorschemes
+      	git clone https://github.com/dracula/xfce4-terminal.git /tmp/xfce4-terminal
 		cp /tmp/xfce4-terminal/Dracula.theme $HOME/.local/share/xfce4/terminal/colorschemes
 
 		# install dracula themes
   		mkdir -p $HOME/.icons
-    		wget -P /tmp https://github.com/dracula/gtk/releases/download/v4.0.0/Dracula-cursors.tar.xz
-      		tar -xvf /tmp/Dracula-cursors.tar.xz -C $HOME/.icons
+    	wget -P /tmp https://github.com/dracula/gtk/releases/download/v4.0.0/Dracula-cursors.tar.xz
+      	tar -xvf /tmp/Dracula-cursors.tar.xz -C $HOME/.icons
 
 		mkdir -p $HOME/.themes
 		wget -P /tmp https://github.com/dracula/gtk/releases/download/v4.0.0/Dracula.tar.xz
